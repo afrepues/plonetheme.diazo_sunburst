@@ -1,6 +1,7 @@
 <rules
     xmlns="http://namespaces.plone.org/diazo"
-    xmlns:css="http://namespaces.plone.org/diazo/css">
+    xmlns:css="http://namespaces.plone.org/diazo/css"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
     <theme href="index.html" css:if-content="#visual-portal-wrapper" />
 
@@ -25,4 +26,10 @@
     <!-- Presentation view not working -->
     <drop css:content="#link-presentation" />
 
+    <xsl:template match="script/@src[starts-with(., 'http://localhost')]">
+      <xsl:attribute
+	  name="src"><xsl:value-of
+	  select="replace(., 'http://localhost:8080/Plone', $portal_url)"
+	  /></xsl:attribute>
+    </xsl:template>
 </rules>
